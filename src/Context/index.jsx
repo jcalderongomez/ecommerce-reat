@@ -1,22 +1,27 @@
-import { createContext, useState } from "react";
+import { createContext, useState } from 'react'
 
 export const ShoppingCartContext = createContext()
 
 // eslint-disable-next-line react/prop-types
 export const ShoppingCartProvider = ({ children }) => {
-    
-    //Shopping Cart - Ingrement quantity
+    // Shopping Cart · Increment quantity
     const [count, setCount] = useState(0)
 
-    //Product Detail - Open / Close
+    // Product Detail · Open/Close
     const [isProductDetailOpen, setIsProductDetailOpen] = useState(false)
     const openProductDetail = () => setIsProductDetailOpen(true)
     const closeProductDetail = () => setIsProductDetailOpen(false)
-    
-    //Product Detail - Show Product
+
+    // Checkout Side Menu  · Open/Close
+    const [isCheckoutSideMenuOpen, setIsCheckoutSideMenuOpen] = useState(false)
+    const openCheckoutSideMenu = () => setIsCheckoutSideMenuOpen(true)
+    const closeCheckoutSideMenu = () => setIsCheckoutSideMenuOpen(false)
+    // Product Detail · Show product
     const [productToShow, setProductToShow] = useState({})
 
-    console.log('count:', count)
+    // Shopping Cart · Add products to cart
+    const [cartProducts, setCartProducts] = useState([])
+
     return (
         <ShoppingCartContext.Provider value={{
             count,
@@ -24,8 +29,14 @@ export const ShoppingCartProvider = ({ children }) => {
             openProductDetail,
             closeProductDetail,
             isProductDetailOpen,
-            productToShow, 
-            setProductToShow
+            productToShow,
+            setProductToShow,
+            cartProducts,
+            setCartProducts,
+            isCheckoutSideMenuOpen,
+            setIsCheckoutSideMenuOpen,
+            openCheckoutSideMenu,
+            closeCheckoutSideMenu
         }}>
             {children}
         </ShoppingCartContext.Provider>
